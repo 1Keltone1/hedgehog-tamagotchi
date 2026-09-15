@@ -55,6 +55,7 @@ const Game = {
 
   restart() {
     localStorage.removeItem("hedgehog-tamagotchi");
+    localStorage.removeItem("hedgehog-shop");
     location.reload();
   },
 

@@ -181,6 +181,7 @@ const Sounds = {
 
 // Инициализация
 document.addEventListener("DOMContentLoaded", () => {
+  Shop.load(); 
   Game.init();
 
   document.getElementById("start-btn").addEventListener("click", () => {

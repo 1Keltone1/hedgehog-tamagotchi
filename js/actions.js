@@ -98,17 +98,33 @@ const Actions = {
     s.energy = Math.max(0, s.energy - 20);
     s.clean  = Math.max(0, s.clean - 10);
 
-    let reward = Math.floor(Math.random() * 5) + 3;
+    // Базовое вознаграждение
+    const baseReward = Math.floor(Math.random() * 5) + 3; // 3–7
+
+    // Проверяем бафф
+    let finalReward = baseReward;
+    let usedStar = false;
+
     if (Shop.isBuffActive("doubleHunt")) {
-      reward *= 2;
+      finalReward = baseReward * 2;
+      usedStar = true;
       delete Shop.activeBuffs.doubleHunt;
+      Shop.save(); 
     }
-    s.money += reward;
+
+    s.money += finalReward;
 
     s.actionCounter.hunt = (s.actionCounter.hunt || 0) + 1;
     const gifIndex = ((s.actionCounter.hunt - 1) % GIFS.hunt.length) + 1;
 
-    UI.showActionGif("hunt", gifIndex, `Ёжик принёс ${reward} червячков!`);
+    let message;
+    if (usedStar) {
+      message = `Ёжик принёс ${baseReward} × 2 = ${finalReward} червячков!`;
+    } else {
+      message = `Ёжик принёс ${finalReward} червячков!`;
+    }
+
+    UI.showActionGif("hunt", gifIndex, message);
     Sounds.play("hunt");
     Levels.addExp(Levels.expRewards.hunt);
 
