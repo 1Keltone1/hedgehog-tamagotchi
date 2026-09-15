@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hedgehog-tamagotchi</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="game-container">
+    <!-- Верхняя панель -->
+    <header id="top-bar">
+      <div id="pet-name">Ёжик</div>
+      <div id="level-info">Ур. 1 — Простой Ёжик</div>
+      <div id="money">Червячки: 0</div>
+    </header>
+
+    <!-- Шкалы -->
+    <section id="stats-bar">
+      <div class="stat">
+        <span class="stat-label">Голод</span>
+        <div class="bar"><div class="bar-fill" id="bar-hunger"></div></div>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Радость</span>
+        <div class="bar"><div class="bar-fill" id="bar-joy"></div></div>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Бодрость</span>
+        <div class="bar"><div class="bar-fill" id="bar-energy"></div></div>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Чистота</span>
+        <div class="bar"><div class="bar-fill" id="bar-clean"></div></div>
+      </div>
+      <div class="stat">
+        <span class="stat-label">Здоровье</span>
+        <div class="bar"><div class="bar-fill" id="bar-health"></div></div>
+      </div>
+    </section>
+
+    <!-- Центр: ёжик -->
+    <section id="pet-display">
+      <img id="pet-gif" src="assets/images/idle-normal.png" alt="Ёжик">
+      <div id="pet-fallback" style="display:none; font-size:80px;">🦔</div>
+      <div id="action-text"></div>
+    </section>
+
+    <!-- Нижняя панель: кнопки -->
+    <section id="actions-bar">
+      <button data-action="eat">Поесть</button>
+      <button data-action="sleep">Поспать</button>
+      <button data-action="wash">Помыться</button>
+      <button data-action="heal">Полечиться</button>
+      <button data-action="hunt">Охота</button>
+      <button data-action="games">Игры</button>
+      <button data-action="shop">Магазин</button>
+      <button id="restart-btn" style="background-color:red">Заново</button>
+    </section>
+  </div>
+
+  <!-- Модальное окно старта -->
+  <div id="start-modal" class="modal">
+    <div class="modal-content">
+      <h1>Новый Ёжик</h1>
+      <p>Как назовёте своего ежа?</p>
+      <input type="text" id="name-input" maxlength="20" placeholder="Имя ежа">
+      <button id="start-btn">Начать игру</button>
+    </div>
+  </div>
+
+  <!-- Модальное окно магазина -->
+  <div id="shop-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Магазин</h2>
+      <div id="shop-items"></div>
+      <button id="close-shop">Закрыть</button>
+    </div>
+  </div>
+
+  <!-- Модальное окно игр -->
+  <div id="games-modal" class="modal hidden">
+    <div class="modal-content">
+      <h2>Выберите игру</h2>
+      <div id="games-list"></div>
+      <button id="close-games">Закрыть</button>
+    </div>
+  </div>
+
+  <script src="js/gifs.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/actions.js"></script>
+  <script src="js/shop.js"></script>
+  <script src="js/levels.js"></script>
+  <script src="js/ui.js"></script>
+</body>
+</html>
