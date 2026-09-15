@@ -18,6 +18,15 @@ const UI = {
     document.getElementById("pet-name").textContent = s.name;
     document.getElementById("level-info").textContent =
       `Ур. ${s.level} — ${Levels.getName(s.level)}`;
+      
+    // Опыт
+    const nextThreshold = Levels.getNextThreshold(s.level);
+    const expEl = document.getElementById("exp-info");
+    if (nextThreshold !== null) {
+      expEl.textContent = `Опыт: ${s.exp || 0} / ${nextThreshold}`;
+    } else {
+      expEl.textContent = `Максимальный уровень`;
+    }
     document.getElementById("money").textContent = `Червячки: ${s.money}`;
 
     // Ёжик — только если сейчас не показывается действие

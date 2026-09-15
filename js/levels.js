@@ -51,4 +51,9 @@ const Levels = {
   getName(level) {
     return this.names[level - 1] || "Ёжик";
   },
+
+  // Порог следующего уровня
+  getNextThreshold(level) {
+    return this.thresholds[level] || null;
+  },
 };
