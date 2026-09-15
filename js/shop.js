@@ -119,6 +119,7 @@ const Shop = {
     Levels.addExp(Levels.expRewards.purchase);
     UI.showMessage(`Куплено: ${item.name}`);
     Game.save();
+    this.save();
     UI.render();
     this.renderItems();
   },
