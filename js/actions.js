@@ -33,7 +33,6 @@ const Actions = {
 
     if (cfg.stat) s[cfg.stat] = Math.min(maxStat, s[cfg.stat] + cfg.delta);
 
-    // Постоянные улучшения
     if (action === "eat" && Shop.purchased.feeder) {
       s.hunger = Math.min(maxStat, s.hunger + 10);
     }
@@ -98,10 +97,8 @@ const Actions = {
     s.energy = Math.max(0, s.energy - 20);
     s.clean  = Math.max(0, s.clean - 10);
 
-    // Базовое вознаграждение
-    const baseReward = Math.floor(Math.random() * 5) + 3; // 3–7
+    const baseReward = Math.floor(Math.random() * 5) + 3;
 
-    // Проверяем бафф
     let finalReward = baseReward;
     let usedStar = false;
 
@@ -109,7 +106,6 @@ const Actions = {
       finalReward = baseReward * 2;
       usedStar = true;
       delete Shop.activeBuffs.doubleHunt;
-      Shop.save(); 
     }
 
     s.money += finalReward;

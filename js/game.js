@@ -1,3 +1,4 @@
+// game.js
 const Game = {
   state: {
     name: "Ёжик",
@@ -53,12 +54,6 @@ const Game = {
     UI.render();
   },
 
-  restart() {
-    localStorage.removeItem("hedgehog-tamagotchi");
-    localStorage.removeItem("hedgehog-shop");
-    location.reload();
-  },
-
   save() {
     localStorage.setItem("hedgehog-tamagotchi", JSON.stringify(this.state));
   },
@@ -69,7 +64,6 @@ const Game = {
 
   tick() {
     const s = this.state;
-    if (s.isDead) return;
 
     const mult = Levels.getDecayMultiplier();
 
@@ -151,5 +145,10 @@ const Game = {
     if (avg >= 70) return "excellent";
     if (avg >= 40) return "normal";
     return "bad";
+  },
+
+  restart() {
+    localStorage.clear();
+    window.location.reload(true);
   },
 };

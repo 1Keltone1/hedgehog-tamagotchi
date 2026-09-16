@@ -21,12 +21,6 @@ const UI = {
       
     // Опыт
     const nextThreshold = Levels.getNextThreshold(s.level);
-    const expEl = document.getElementById("exp-info");
-    if (nextThreshold !== null) {
-      expEl.textContent = `Опыт: ${s.exp || 0} / ${nextThreshold}`;
-    } else {
-      expEl.textContent = `Максимальный уровень`;
-    }
     document.getElementById("money").textContent = `Червячки: ${s.money}`;
 
     // Ёжик — только если сейчас не показывается действие
@@ -190,7 +184,6 @@ const Sounds = {
 
 // Инициализация
 document.addEventListener("DOMContentLoaded", () => {
-  Shop.load(); 
   Game.init();
 
   document.getElementById("start-btn").addEventListener("click", () => {

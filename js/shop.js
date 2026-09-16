@@ -119,7 +119,6 @@ const Shop = {
     Levels.addExp(Levels.expRewards.purchase);
     UI.showMessage(`Куплено: ${item.name}`);
     Game.save();
-    this.save();
     UI.render();
     this.renderItems();
   },
@@ -127,22 +126,18 @@ const Shop = {
   getMaxStat() {
     return this.purchased.basket ? 150 : 100;
   },
-
+  
   activateBuff(buffName, duration) {
+    this.activeBuffs[buffName] = Date.now() + duration;
     if (duration > 0) {
-      this.activeBuffs[buffName] = Date.now() + duration;
       setTimeout(() => {
         delete this.activeBuffs[buffName];
       }, duration);
-    } else {
-      // Бессрочный бафф (до следующего использования)
-      this.activeBuffs[buffName] = Infinity;
     }
   },
 
   isBuffActive(buffName) {
-    const val = this.activeBuffs[buffName];
-    return val && val > Date.now();
+    return this.activeBuffs[buffName] && this.activeBuffs[buffName] > Date.now();
   },
 
   renderItems() {
@@ -165,29 +160,10 @@ const Shop = {
     });
 
     container.querySelectorAll("[data-buy]").forEach(btn => {
-      btn.addEventListener("click", () => this.buy(btn.dataset.buy));
+      btn.addEventListener("click", () => {
+        Sounds.play("click");
+        this.buy(btn.dataset.buy);
+      });
     });
   },
-
-  save() {
-    localStorage.setItem("hedgehog-shop", JSON.stringify({
-      purchased: this.purchased,
-      activeBuffs: this.activeBuffs,
-    }));
-  },
-
-  load() {
-    const saved = localStorage.getItem("hedgehog-shop");
-    if (saved) {
-      try {
-        const parsed = JSON.parse(saved);
-        this.purchased = parsed.purchased || {};
-        this.activeBuffs = parsed.activeBuffs || {};
-      } catch (e) {
-        this.purchased = {};
-        this.activeBuffs = {};
-      }
-    }
-  },
-  
 };

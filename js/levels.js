@@ -11,7 +11,6 @@ const Levels = {
     "Легендарный Ёжик",
   ],
 
-  // Опыт за действия
   expRewards: {
     action: 5,
     game: 10,
@@ -19,14 +18,12 @@ const Levels = {
     purchase: 5,
   },
 
-  // Добавить опыт
   addExp(amount) {
     const s = Game.state;
     s.exp = (s.exp || 0) + amount;
     this.check();
   },
 
-  // Проверка уровня
   check() {
     const s = Game.state;
     const exp = s.exp || 0;
@@ -43,7 +40,6 @@ const Levels = {
     }
   },
 
-  // Множитель скорости падения шкал
   getDecayMultiplier() {
     return 1 + (Game.state.level - 1) * 0.2;
   },
@@ -52,7 +48,6 @@ const Levels = {
     return this.names[level - 1] || "Ёжик";
   },
 
-  // Порог следующего уровня
   getNextThreshold(level) {
     return this.thresholds[level] || null;
   },
